@@ -15,13 +15,13 @@ CURRENTDATE=$(date +%Y-%m-%d)
 backup_database() {
   local db_name="$1"
   local backup_file="$BACKUPDIR/$CURRENTDATE-$db_name.sql.gz"
-  
+
   # Skip excluded databases
   if [[ "$EXCLUDE_DBS" =~ " $db_name " ]]; then
     echo "Skipping excluded database: $db_name"
     return
   fi
-  
+
   # Dump the database
   pg_dump -h "$PGHOST" -p "$PGPORT" -U "$PGUSER" "$db_name" | gzip > "$backup_file"
   echo "Backup completed: $backup_file"
@@ -39,6 +39,6 @@ for db_name in $databases; do
 done
 
 # Delete backups older than 60 days
-find "$BACKUPDIR" -type f -name "*.sql.gz" -mtime +60 -delete
+find "$BACKUPDIR" -type f -name "*.sql.gz" -mtime +30 -delete
 
 echo "Deleted old backups from $BACKUPDIR"
