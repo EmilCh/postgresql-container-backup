@@ -1,5 +1,5 @@
 FROM alpine:latest
-RUN apk add --no-cache  postgresql16-client bash
+RUN apk add --no-cache  postgresql17-client bash
 COPY root /
 RUN chmod +x /*.sh
 EXPOSE 80
