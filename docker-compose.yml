@@ -1,0 +1,4 @@
+services:
+  ttrss:
+    build: ./
+    image: registry.cheriches.eu/postgresql-container-backup:${TAG}
